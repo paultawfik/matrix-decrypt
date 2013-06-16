@@ -23,7 +23,7 @@ void sgemm( int m, int n, int d, float *A, float *C ) {
 				t4 = _mm_loadu_ps(C + 16 + x);
 				e1 = _mm_loadu_ps(C + 20 + x);
 				
-				for (k = 0; k < y; k+=4) {
+				for (k = 0; k < y; k += 4) {
 					x = k * n + i;
 					trans = _mm_load1_ps(A + j * (n + 1) + k * n);
 
@@ -43,7 +43,7 @@ void sgemm( int m, int n, int d, float *A, float *C ) {
 					
 					x = (k + 1) * n + i;
 
-					trans = _mm_load1_ps(A + j * (n + 1) + (k+1) * n);
+					trans = _mm_load1_ps(A + j * (n + 1) + (k + 1) * n);
 
 					t5 = _mm_mul_ps(_mm_loadu_ps(A + x), trans);
 					t6 = _mm_mul_ps(_mm_loadu_ps(A + 4 + x), trans);
@@ -61,7 +61,7 @@ void sgemm( int m, int n, int d, float *A, float *C ) {
 
 					x = (k + 2) * n + i;
 
-					trans = _mm_load1_ps(A + j * (n + 1) + (k+2) * n);
+					trans = _mm_load1_ps(A + j * (n + 1) + (k + 2) * n);
 
 					t5 = _mm_mul_ps(_mm_loadu_ps(A + x), trans);
 					t6 = _mm_mul_ps(_mm_loadu_ps(A + 4 + x), trans);
@@ -79,7 +79,7 @@ void sgemm( int m, int n, int d, float *A, float *C ) {
 					
 					x = (k + 3) * n + i;
 
-					trans = _mm_load1_ps(A + j * (n + 1) + (k+3) * n);
+					trans = _mm_load1_ps(A + j * (n + 1) + (k + 3) * n);
 
 					t5 = _mm_mul_ps(_mm_loadu_ps(A + x), trans);
 					t6 = _mm_mul_ps(_mm_loadu_ps(A + 4 + x), trans);
@@ -96,7 +96,7 @@ void sgemm( int m, int n, int d, float *A, float *C ) {
 					e1 = _mm_add_ps(e1, e2);
 				}
 
-				for (k; k < limit2; k+=2) {
+				for (k; k < limit2; k += 2) {
 					x = k * n + i;
 					trans = _mm_load1_ps(A + j * (n + 1) + k * n);
 
@@ -117,7 +117,7 @@ void sgemm( int m, int n, int d, float *A, float *C ) {
 					
 					x = (k + 1) * n + i;
 
-					trans = _mm_load1_ps(A + j * (n + 1) + (k+1) * n);
+					trans = _mm_load1_ps(A + j * (n + 1) + (k + 1) * n);
 
 					t5 = _mm_mul_ps(_mm_loadu_ps(A + x), trans);
 					t6 = _mm_mul_ps(_mm_loadu_ps(A + 4 + x), trans);
@@ -167,7 +167,7 @@ void sgemm( int m, int n, int d, float *A, float *C ) {
 				t0 = _mm_loadu_ps(C + i + j * n);
 				t1 = _mm_loadu_ps(C + i + 4 + j * n);
 				
-				for (k = 0; k < limit2; k+=2) {
+				for (k = 0; k < limit2; k += 2) {
 					trans = _mm_load1_ps(A + j * (n + 1) + k * n);
 
 					t5 = _mm_mul_ps(_mm_loadu_ps(A + 0 + i + k * n), trans);
@@ -176,10 +176,10 @@ void sgemm( int m, int n, int d, float *A, float *C ) {
 					t0 = _mm_add_ps(t0, t5);
 					t1 = _mm_add_ps(t1, t6);
 
-					trans = _mm_load1_ps(A + j * (n + 1) + (k+1) * n);
+					trans = _mm_load1_ps(A + j * (n + 1) + (k + 1) * n);
 
-					t7 = _mm_mul_ps(_mm_loadu_ps(A + 0 + i + (k+1) * n), trans);
-					t8 = _mm_mul_ps(_mm_loadu_ps(A + 4 + i + (k+1) * n), trans);
+					t7 = _mm_mul_ps(_mm_loadu_ps(A + 0 + i + (k + 1) * n), trans);
+					t8 = _mm_mul_ps(_mm_loadu_ps(A + 4 + i + (k + 1) * n), trans);
 
 					t0 = _mm_add_ps(t0, t7);
 					t1 = _mm_add_ps(t1, t8);
@@ -203,12 +203,12 @@ void sgemm( int m, int n, int d, float *A, float *C ) {
 			for(i; i < limit4; i += 4 ) {
 				t0 = _mm_loadu_ps(C + i + j * n);
 				
-				for (k = 0; k < limit2; k+=2) {
+				for (k = 0; k < limit2; k += 2) {
 					trans = _mm_load1_ps(A + j * (n + 1) + k * n);
-					e1 = _mm_load1_ps(A + j * (n + 1) + (k+1) * n);
+					e1 = _mm_load1_ps(A + j * (n + 1) + (k + 1) * n);
 
 					t5 = _mm_mul_ps(_mm_loadu_ps(A + 0 + i + k * n), trans);
-					t7 = _mm_mul_ps(_mm_loadu_ps(A + 0 + i + (k+1) * n), e1);
+					t7 = _mm_mul_ps(_mm_loadu_ps(A + 0 + i + (k + 1) * n), e1);
 					t0 = _mm_add_ps(t0, t5);
 					t0 = _mm_add_ps(t0, t7);
 
@@ -226,7 +226,7 @@ void sgemm( int m, int n, int d, float *A, float *C ) {
 
 			for(i; i < n; i++) {
 				for( k = 0; k < m; k++ ) {
-					C[i+j*n] += A[i+k*n] * A[j*(n+1)+k*n];
+					C[i + j * n] += A[i + k * n] * A[j * (n + 1)+k * n];
 				}
 			}
 		}
